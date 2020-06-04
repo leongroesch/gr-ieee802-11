@@ -29,6 +29,7 @@ list(APPEND include_sources
     mac.h
     mapper.h
     parse_mac.h
+    parse_meta_mac.h
     signal_field.h
     sync_long.h
     sync_short.h

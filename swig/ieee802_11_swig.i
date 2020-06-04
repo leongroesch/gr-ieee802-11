@@ -32,6 +32,7 @@
 #include "ieee802_11/mac.h"
 #include "ieee802_11/mapper.h"
 #include "ieee802_11/parse_mac.h"
+#include "ieee802_11/parse_meta_mac.h"
 #include "ieee802_11/signal_field.h"
 #include "ieee802_11/sync_long.h"
 #include "ieee802_11/sync_short.h"
@@ -52,6 +53,7 @@
 %include "ieee802_11/mac.h"
 %include "ieee802_11/mapper.h"
 %include "ieee802_11/parse_mac.h"
+%include "ieee802_11/parse_meta_mac.h"
 %include "ieee802_11/signal_field.h"
 %include "ieee802_11/sync_long.h"
 %include "ieee802_11/sync_short.h"
@@ -63,6 +65,7 @@ GR_SWIG_BLOCK_MAGIC2(ieee802_11, frame_equalizer);
 GR_SWIG_BLOCK_MAGIC2(ieee802_11, mac);
 GR_SWIG_BLOCK_MAGIC2(ieee802_11, mapper);
 GR_SWIG_BLOCK_MAGIC2(ieee802_11, parse_mac);
+GR_SWIG_BLOCK_MAGIC2(ieee802_11, parse_meta_mac);
 GR_SWIG_BLOCK_MAGIC2(ieee802_11, sync_long);
 GR_SWIG_BLOCK_MAGIC2(ieee802_11, sync_short);
 

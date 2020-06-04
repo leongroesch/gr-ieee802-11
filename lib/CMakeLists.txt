@@ -43,6 +43,7 @@ list(APPEND ieee802_11_sources
     mac.cc
     mapper.cc
     parse_mac.cc
+    parse_meta_mac.cc
     signal_field_impl.cc
     sync_long.cc
     sync_short.cc
