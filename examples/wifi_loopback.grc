@@ -199,7 +199,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 140.0]
+    coordinate: [168, 148.0]
     rotation: 0
     state: true
 - name: blocks_file_sink_0
@@ -219,7 +219,7 @@ blocks:
     bus_structure: null
     coordinate: [120, 556.0]
     rotation: 180
-    state: enabled
+    state: disabled
 - name: blocks_message_strobe_0
   id: blocks_message_strobe
   parameters:
@@ -272,6 +272,26 @@ blocks:
     coordinate: [400, 372.0]
     rotation: 180
     state: enabled
+- name: blocks_socket_pdu_0
+  id: blocks_socket_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    host: 127.0.01
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mtu: '10000'
+    port: '52002'
+    tcp_no_delay: 'False'
+    type: UDP_CLIENT
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 452.0]
+    rotation: 180
+    state: true
 - name: channels_channel_model_0
   id: channels_channel_model
   parameters:
@@ -329,7 +349,7 @@ blocks:
     bus_structure: null
     coordinate: [336, 564.0]
     rotation: 180
-    state: enabled
+    state: disabled
 - name: ieee802_11_mac_0
   id: ieee802_11_mac
   parameters:
@@ -348,8 +368,8 @@ blocks:
     coordinate: [784, 212.0]
     rotation: 0
     state: enabled
-- name: ieee802_11_parse_mac_0
-  id: ieee802_11_parse_mac
+- name: ieee802_11_parse_meat_mac_0
+  id: ieee802_11_parse_meat_mac
   parameters:
     affinity: ''
     alias: ''
@@ -362,9 +382,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [344, 476.0]
+    coordinate: [368, 468.0]
     rotation: 180
-    state: enabled
+    state: true
 - name: qtgui_const_sink_x_0
   id: qtgui_const_sink_x
   parameters:
@@ -486,10 +506,11 @@ connections:
 - [foo_packet_pad2_0, '0', blocks_multiply_const_xx_0, '0']
 - [foo_wireshark_connector_0, '0', blocks_file_sink_0, '0']
 - [ieee802_11_mac_0, phy out, wifi_phy_hier_0, mac_in]
+- [ieee802_11_parse_meat_mac_0, fer, blocks_socket_pdu_0, pdus]
 - [wifi_phy_hier_0, '0', foo_packet_pad2_0, '0']
 - [wifi_phy_hier_0, carrier, blocks_pdu_to_tagged_stream_0_0, pdus]
 - [wifi_phy_hier_0, mac_out, foo_wireshark_connector_0, in]
-- [wifi_phy_hier_0, mac_out, ieee802_11_parse_mac_0, in]
+- [wifi_phy_hier_0, mac_out, ieee802_11_parse_meat_mac_0, in]
 
 metadata:
   file_format: 1
