@@ -64,29 +64,21 @@ void parse_meta_data(const pmt::pmt_t& dict, mac_header* macHeader)
     }
     double freqof = 0;
     if(pmt::dict_has_key(dict, pmt::mp("freqofs"))) {
-        dout << "has Key freqofs" << pmt::dict_keys(dict) << std::endl;
         pmt::pmt_t value = pmt::dict_ref(dict, pmt::mp("freqofs"), pmt::PMT_NIL);
         if(pmt::is_number(value)) {
             freqof = pmt::to_double(value);
         }
     }
-    else{
-        dout << "no Key freqofs: " << pmt::dict_keys(dict) << std::endl;
-    }
+
     std::string data;
-    data.append("time: ");
     data.append(std::to_string(std::time(nullptr)));
-    data.append("mac1: ");
+    data.append(";");
     data.append(get_mac_string(macHeader->addr1));
-    data.append("mac2: ");
-    data.append(get_mac_string(macHeader->addr2));
-    data.append("mac3: ");
-    data.append(get_mac_string(macHeader->addr3));
-    data.append("snr: ");
+    data.append(";");
     data.append(std::to_string(snr));
-    data.append(";freq: ");
+    data.append(";");
     data.append(std::to_string(freq));
-    data.append(";freqof: ");
+    data.append(";");
     data.append(std::to_string(freqof));
     /*
     pmt::pmt_t vec = pmt::make_f64vector(3, 8.0);
