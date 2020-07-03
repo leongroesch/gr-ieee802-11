@@ -73,24 +73,17 @@ void parse_meta_data(const pmt::pmt_t& dict, mac_header* macHeader)
     std::string data;
     data.append(std::to_string(std::time(nullptr)));
     data.append(";");
-    data.append(get_mac_string(macHeader->addr1));
+    data.append(get_mac_string(macHeader->addr2));
     data.append(";");
     data.append(std::to_string(snr));
     data.append(";");
     data.append(std::to_string(freq));
     data.append(";");
     data.append(std::to_string(freqof));
-    /*
-    pmt::pmt_t vec = pmt::make_f64vector(3, 8.0);
-    pmt::f64vector_set(vec, 0, snr);
-+   pmt::f64vector_set(vec, 1, freq);
-    pmt::f64vector_set(vec, 2, freqof);
-     */
 
-    dout << data << std::endl;
+    dout << "Meta MAC Data:" << data << std::endl;
     std::size_t data_len = sizeof(data.c_str()[0]) * data.size();
     message_port_pub(pmt::mp("fer"), pmt::cons( pmt::PMT_NIL,  pmt::make_blob(data.c_str(), data_len)));
-    dout << "After PUB" << std::endl;
 }
 
 std::string get_mac_string(uint8_t *addr) const
