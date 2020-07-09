@@ -53,7 +53,7 @@ blocks:
     options: '[ieee802_11.LS, ieee802_11.LMS, ieee802_11.STA, ieee802_11.COMB]'
     orient: Qt.QHBoxLayout
     type: int
-    value: '0'
+    value: '1'
     widget: radio_buttons
   states:
     bus_sink: false
@@ -114,7 +114,7 @@ blocks:
       5910000000.0, 5920000000.0]'
     orient: Qt.QVBoxLayout
     type: real
-    value: '5890000000'
+    value: '2472000000.0'
     widget: combo_box
   states:
     bus_sink: false
@@ -195,7 +195,7 @@ blocks:
     options: '[5e6, 10e6, 20e6]'
     orient: Qt.QVBoxLayout
     type: real
-    value: 10e6
+    value: 20e6
     widget: combo_box
   states:
     bus_sink: false
@@ -346,7 +346,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [864, 828.0]
+    coordinate: [944, 796.0]
     rotation: 180
     state: enabled
 - name: blocks_moving_average_xx_0
@@ -421,7 +421,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [584, 836]
+    coordinate: [576, 836.0]
     rotation: 180
     state: enabled
 - name: blocks_socket_pdu_0
@@ -441,9 +441,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [880, 948.0]
-    rotation: 180
-    state: disabled
+    coordinate: [1568, 724.0]
+    rotation: 0
+    state: enabled
 - name: blocks_stream_to_vector_0
   id: blocks_stream_to_vector
   parameters:
@@ -497,7 +497,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1056, 836.0]
+    coordinate: [1136, 804.0]
     rotation: 180
     state: enabled
 - name: ieee802_11_decode_mac_0
@@ -507,7 +507,7 @@ blocks:
     alias: ''
     comment: ''
     debug: 'False'
-    log: 'True'
+    log: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
@@ -537,23 +537,23 @@ blocks:
     coordinate: [432, 672]
     rotation: 0
     state: enabled
-- name: ieee802_11_parse_mac_0
-  id: ieee802_11_parse_mac
+- name: ieee802_11_parse_meat_mac_0
+  id: ieee802_11_parse_meat_mac
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     debug: 'True'
-    log: 'True'
+    log: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1216, 924.0]
-    rotation: 180
-    state: disabled
+    coordinate: [1320, 724.0]
+    rotation: 0
+    state: true
 - name: ieee802_11_sync_long_0
   id: ieee802_11_sync_long
   parameters:
@@ -561,7 +561,7 @@ blocks:
     alias: ''
     comment: ''
     debug: 'False'
-    log: 'True'
+    log: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
     sync_length: sync_length
@@ -1170,10 +1170,10 @@ connections:
 - [fft_vxx_0, '0', ieee802_11_frame_equalizer_0, '0']
 - [foo_wireshark_connector_0, '0', blocks_file_sink_0, '0']
 - [ieee802_11_decode_mac_0, out, foo_wireshark_connector_0, in]
-- [ieee802_11_decode_mac_0, out, ieee802_11_parse_mac_0, in]
+- [ieee802_11_decode_mac_0, out, ieee802_11_parse_meat_mac_0, in]
 - [ieee802_11_frame_equalizer_0, '0', ieee802_11_decode_mac_0, '0']
 - [ieee802_11_frame_equalizer_0, symbols, blocks_pdu_to_tagged_stream_1, pdus]
-- [ieee802_11_parse_mac_0, fer, blocks_socket_pdu_0, pdus]
+- [ieee802_11_parse_meat_mac_0, fer, blocks_socket_pdu_0, pdus]
 - [ieee802_11_sync_long_0, '0', blocks_stream_to_vector_0, '0']
 - [ieee802_11_sync_short_0, '0', blocks_delay_0, '0']
 - [ieee802_11_sync_short_0, '0', ieee802_11_sync_long_0, '0']
