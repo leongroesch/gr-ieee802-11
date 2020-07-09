@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import mysql.connector
 import matplotlib.pyplot as plt
 from operator import itemgetter
