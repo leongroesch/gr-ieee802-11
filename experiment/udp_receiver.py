@@ -53,7 +53,7 @@ def main():
 
   sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
   sock.bind((ip,port))
-  print("Listening on: %s:%d" % (ip, port));
+  print("Listening on: %s:%d" % (ip, port))
 
   while True:
     data, addr = sock.recvfrom(1024)
