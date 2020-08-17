@@ -10,10 +10,15 @@ def str_to_float(s):
 
 def convert_data(data):
   fields = str(data,'utf-8').split(';')
+  if fields[2] != '00:0:0:0:0:0':
+    fields[1] = fields[2]
+  else:
+    return False
   fields[0] = str_to_float(fields[0])
-  fields[2] = str_to_float(fields[2])
-  fields[3] = str_to_float(fields[3])
-  fields[4] = str_to_float(fields[4])
+  fields[2] = str_to_float(fields[3])
+  fields[3] = str_to_float(fields[4])
+  fields[4] = str_to_float(fields[5])
+  fields.pop(-1)
   return fields
 
 # Makes sure the required database and the required table is there 
@@ -28,6 +33,7 @@ def init_db(db_cursor):
                         norm_freq DOUBLE,
                         freq_offset DOUBLE
                     );""")
+  print("Successfully Connected to database")
 
 def main():
   ip = "127.0.0.1"
@@ -45,7 +51,6 @@ def main():
       user="root",
       password="123",
       auth_plugin='mysql_native_password'
-     # database="MAC_Frames"
   )
 
   db_cursor = mydb.cursor()
@@ -60,6 +65,8 @@ def main():
     data, addr = sock.recvfrom(1024)
     try:
       data_array = convert_data(data)
+      if not data_array:
+        continue
       db_cursor.execute(sql_insert, data_array)
       print("Received Data: ", data_array)
       mydb.commit()
