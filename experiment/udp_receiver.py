@@ -10,15 +10,13 @@ def str_to_float(s):
 
 def convert_data(data):
   fields = str(data,'utf-8').split(';')
-  if fields[2] != '00:0:0:0:0:0':
-    fields[1] = fields[2]
-  else:
+  if fields[2] == '00:0:0:0:0:0':
     return False
   fields[0] = str_to_float(fields[0])
-  fields[2] = str_to_float(fields[3])
-  fields[3] = str_to_float(fields[4])
-  fields[4] = str_to_float(fields[5])
-  fields.pop(-1)
+  fields[1] = int(fields[1])
+  fields[3] = str_to_float(fields[3])
+  fields[4] = str_to_float(fields[4])
+  fields[5] = str_to_float(fields[5])
   return fields
 
 # Makes sure the required database and the required table is there 
@@ -28,17 +26,19 @@ def init_db(db_cursor):
   db_cursor.execute("""CREATE TABLE IF NOT EXISTS frames (
                         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         record_time INT,
+                        frame_type INT,
                         sender_mac VARCHAR(20),
                         snr FLOAT,
                         norm_freq DOUBLE,
-                        freq_offset DOUBLE
+                        freq_offset DOUBLE,
+                        sdr_id VARCHAR(20)
                     );""")
   print("Successfully Connected to database")
 
 def main():
   ip = "127.0.0.1"
   port = 52002
-  sql_insert = "INSERT INTO frames (record_time, sender_mac, snr, norm_freq, freq_offset) VALUES (%s, %s, %s, %s, %s)"
+  sql_insert = "INSERT INTO frames (record_time, frame_type, sender_mac, snr, norm_freq, freq_offset, sdr_id) VALUES (%s, %s, %s, %s, %s, %s, %s)"
 
   if( len(sys.argv) >= 3):  
     ip = sys.argv[1] #"127.0.0.1"

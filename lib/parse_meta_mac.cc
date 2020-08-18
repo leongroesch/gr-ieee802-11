@@ -27,12 +27,13 @@ class parse_meta_mac_impl : public parse_meta_mac {
 
 public:
 
-parse_meta_mac_impl(bool log, bool debug) :
+parse_meta_mac_impl(bool log, bool debug, std::string sdr_id) :
 		block("parse_meta_mac",
 				gr::io_signature::make(0, 0, 0),
 				gr::io_signature::make(0, 0, 0)),
 		d_log(log), d_last_seq_no(-1),
-		d_debug(debug) {
+		d_debug(debug),
+        d_sdr_id(sdr_id) {
 
 	message_port_register_in(pmt::mp("in"));
 	set_msg_handler(pmt::mp("in"), boost::bind(&parse_meta_mac_impl::parse, this, _1));
@@ -73,6 +74,8 @@ void parse_meta_data(const pmt::pmt_t& dict, mac_header* macHeader)
     std::string data;
     data.append(std::to_string(std::time(nullptr)));
     data.append(";");
+    data.append(std::to_string(macHeader->frame_control));
+    data.append(";");
     data.append(get_mac_string(macHeader->addr2));
     data.append(";");
     data.append(std::to_string(snr));
@@ -80,6 +83,9 @@ void parse_meta_data(const pmt::pmt_t& dict, mac_header* macHeader)
     data.append(std::to_string(freq));
     data.append(";");
     data.append(std::to_string(freqof));
+    data.append(";");
+    data.append(d_sdr_id);
+    
 
     dout << "Meta MAC Data:" << data << std::endl;
     std::size_t data_len = sizeof(data.c_str()[0]) * data.size();
@@ -116,18 +122,17 @@ void parse(pmt::pmt_t msg) {
 
 	mac_header* header = (mac_header*)pmt::blob_data(msg);
 
-	dout << "Dict: " << pmt::dict_keys(dict) << std::endl;
 	parse_meta_data(dict, header);
-
 }
 
 private:
 	bool d_log;
 	bool d_debug;
 	int d_last_seq_no;
+    std::string d_sdr_id;
 };
 
 parse_meta_mac::sptr
-parse_meta_mac::make(bool log, bool debug) {
-	return gnuradio::get_initial_sptr(new parse_meta_mac_impl(log, debug));
+parse_meta_mac::make(bool log, bool debug, std::string sdr_id) {
+	return gnuradio::get_initial_sptr(new parse_meta_mac_impl(log, debug, sdr_id));
 }

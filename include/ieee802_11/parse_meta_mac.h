@@ -28,7 +28,7 @@ class IEEE802_11_API parse_meta_mac : virtual public block
 public:
 
 	typedef boost::shared_ptr<parse_meta_mac> sptr;
-	static sptr make(bool log = false, bool debug = false);
+	static sptr make(bool log = false, bool debug = false, std::string sdr_id = "0000");
 
 };
 
