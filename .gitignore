@@ -7,3 +7,6 @@ examples/*.py
 *.pyc
 **/.DS_Store
 .clang_complete
+cmake-build-debug/
+.idea/
+python
