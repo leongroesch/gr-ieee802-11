@@ -63,14 +63,11 @@ def main():
 
   while True:
     data, addr = sock.recvfrom(1024)
-    try:
-      data_array = convert_data(data)
-      if not data_array:
-        continue
-      db_cursor.execute(sql_insert, data_array)
-      print("Received Data: ", data_array)
-      mydb.commit()
-    except:
-      print(traceback.format_exc())
+    data_array = convert_data(data)
+    if not data_array:
+      continue
+    db_cursor.execute(sql_insert, data_array)
+    print("Received Data: ", data_array)
+    mydb.commit()
 
 main()
