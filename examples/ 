@@ -1,2 +1,0 @@
-cmdline: /usr/lib/x86_64-linux-gnu/wireshark/extcap/udpdump --capture --extcap-interface udpdump --fifo /tmp/wireshark_extcap_udpdump_20200707102551_QbmjiY --port 52002 --payload data --debug false --debug-file   
-Listener running on port 52002

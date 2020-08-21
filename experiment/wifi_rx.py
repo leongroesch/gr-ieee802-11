@@ -277,12 +277,11 @@ class wifi_rx(gr.top_block, Qt.QWidget):
         self.ieee802_11_sync_short_0 = ieee802_11.sync_short(0.56, 2, False, False)
         self.ieee802_11_sync_long_0 = ieee802_11.sync_long(sync_length, False, False)
         if args.sdr_id == None:
-            self.ieee802_11_parse_meat_mac_0 = ieee802_11.parse_meta_mac(False, True, "0000")
+            self.ieee802_11_parse_meat_mac_0 = ieee802_11.parse_meta_mac(False, False, "0000")
         else:
-            self.ieee802_11_parse_meat_mac_0 = ieee802_11.parse_meta_mac(False, True, args.sdr_id)
+            self.ieee802_11_parse_meat_mac_0 = ieee802_11.parse_meta_mac(False, False, args.sdr_id)
         self.ieee802_11_frame_equalizer_0 = ieee802_11.frame_equalizer(chan_est, freq, samp_rate, False, False)
         self.ieee802_11_decode_mac_0 = ieee802_11.decode_mac(False, False)
-        self.foo_wireshark_connector_0 = foo.wireshark_connector(127, False)
         self.fft_vxx_0 = fft.fft_vcc(64, True, window.rectangular(64), True, 1)
         self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, 64)
         if args.server == None:
@@ -293,8 +292,6 @@ class wifi_rx(gr.top_block, Qt.QWidget):
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_moving_average_xx_1 = blocks.moving_average_cc(window_size, 1, 4000, 1)
         self.blocks_moving_average_xx_0 = blocks.moving_average_ff(window_size  + 16, 1, 4000, 1)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, 'wifi.pcap', False)
-        self.blocks_file_sink_0.set_unbuffered(True)
         self.blocks_divide_xx_0 = blocks.divide_ff(1)
         self.blocks_delay_0_0 = blocks.delay(gr.sizeof_gr_complex*1, 16)
         self.blocks_delay_0 = blocks.delay(gr.sizeof_gr_complex*1, sync_length)
@@ -307,7 +304,6 @@ class wifi_rx(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.ieee802_11_decode_mac_0, 'out'), (self.foo_wireshark_connector_0, 'in'))
         self.msg_connect((self.ieee802_11_decode_mac_0, 'out'), (self.ieee802_11_parse_meat_mac_0, 'in'))
         self.msg_connect((self.ieee802_11_frame_equalizer_0, 'symbols'), (self.blocks_pdu_to_tagged_stream_1, 'pdus'))
         self.msg_connect((self.ieee802_11_parse_meat_mac_0, 'fer'), (self.blocks_socket_pdu_0, 'pdus'))
@@ -326,7 +322,6 @@ class wifi_rx(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_pdu_to_tagged_stream_1, 0), (self.qtgui_const_sink_x_0, 0))
         self.connect((self.blocks_stream_to_vector_0, 0), (self.fft_vxx_0, 0))
         self.connect((self.fft_vxx_0, 0), (self.ieee802_11_frame_equalizer_0, 0))
-        self.connect((self.foo_wireshark_connector_0, 0), (self.blocks_file_sink_0, 0))
         self.connect((self.ieee802_11_frame_equalizer_0, 0), (self.ieee802_11_decode_mac_0, 0))
         self.connect((self.ieee802_11_sync_long_0, 0), (self.blocks_stream_to_vector_0, 0))
         self.connect((self.ieee802_11_sync_short_0, 0), (self.blocks_delay_0, 0))
