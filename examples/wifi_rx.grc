@@ -22,11 +22,8 @@ options:
     sizing_mode: fixed
     thread_safe_setters: ''
     title: ''
-    window_size: ''
+    window_size: 1280, 2048
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [8, 12.0]
     rotation: 0
     state: enabled
@@ -45,7 +42,6 @@ blocks:
     label4: ''
     labels: '["LS", "LMS", "STA", "Linear Comb"]'
     num_opts: '0'
-    option0: '0'
     option1: '1'
     option2: '2'
     option3: '3'
@@ -53,12 +49,9 @@ blocks:
     options: '[ieee802_11.LS, ieee802_11.LMS, ieee802_11.STA, ieee802_11.COMB]'
     orient: Qt.QHBoxLayout
     type: int
-    value: '1'
+    value: '0'
     widget: radio_buttons
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [312, 12.0]
     rotation: 0
     state: enabled
@@ -95,7 +88,6 @@ blocks:
       11p'', ''174 | 5870.0 | 11p'', ''176 | 5880.0 | 11p'', ''178 | 5890.0 | 11p'',
       ''180 | 5900.0 | 11p'', ''182 | 5910.0 | 11p'', ''184 | 5920.0 | 11p'']'
     num_opts: '0'
-    option0: '0'
     option1: '1'
     option2: '2'
     option3: '3'
@@ -114,12 +106,9 @@ blocks:
       5910000000.0, 5920000000.0]'
     orient: Qt.QVBoxLayout
     type: real
-    value: '2472000000.0'
+    value: '5890000000'
     widget: combo_box
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [624, 12.0]
     rotation: 0
     state: enabled
@@ -138,9 +127,6 @@ blocks:
     value: '0.75'
     widget: counter_slider
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [488, 12.0]
     rotation: 0
     state: enabled
@@ -150,14 +136,13 @@ blocks:
     comment: ''
     gui_hint: ''
     label: ''
-    label0: '0'
-    label1: 6M
-    label2: 11M
+    label0: ''
+    label1: ''
+    label2: ''
     label3: ''
     label4: ''
     labels: '[]'
     num_opts: '3'
-    option0: '0'
     option1: 6e6
     option2: 11e6
     option3: '3'
@@ -168,9 +153,6 @@ blocks:
     value: '0'
     widget: combo_box
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [176, 12.0]
     rotation: 0
     state: enabled
@@ -187,7 +169,6 @@ blocks:
     label4: ''
     labels: '["5 MHz", "10 MHz", "20 MHz"]'
     num_opts: '0'
-    option0: '0'
     option1: '1'
     option2: '2'
     option3: '3'
@@ -195,12 +176,9 @@ blocks:
     options: '[5e6, 10e6, 20e6]'
     orient: Qt.QVBoxLayout
     type: real
-    value: 20e6
+    value: 10e6
     widget: combo_box
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [800, 12.0]
     rotation: 0
     state: enabled
@@ -210,10 +188,7 @@ blocks:
     comment: ''
     value: '320'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [16, 148.0]
+    coordinate: [8, 133]
     rotation: 0
     state: enabled
 - name: window_size
@@ -222,9 +197,6 @@ blocks:
     comment: ''
     value: '48'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [8, 84.0]
     rotation: 0
     state: enabled
@@ -238,9 +210,6 @@ blocks:
     minoutbuf: '0'
     vlen: '1'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [1016, 312]
     rotation: 0
     state: enabled
@@ -254,9 +223,6 @@ blocks:
     minoutbuf: '0'
     vlen: '1'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [496, 208.0]
     rotation: 0
     state: enabled
@@ -269,9 +235,6 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [424, 328]
     rotation: 0
     state: enabled
@@ -288,9 +251,6 @@ blocks:
     type: complex
     vlen: '1'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [536, 540.0]
     rotation: 0
     state: enabled
@@ -307,9 +267,6 @@ blocks:
     type: complex
     vlen: '1'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [264, 324]
     rotation: 0
     state: enabled
@@ -325,9 +282,6 @@ blocks:
     type: float
     vlen: '1'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [1168, 400]
     rotation: 270
     state: enabled
@@ -338,17 +292,14 @@ blocks:
     alias: ''
     append: 'True'
     comment: ''
-    file: wifi.pcap
+    file: /tmp/wifi.pcap
     type: byte
     unbuffered: 'True'
     vlen: '1'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [944, 796.0]
+    coordinate: [768, 908]
     rotation: 180
-    state: enabled
+    state: disabled
 - name: blocks_moving_average_xx_0
   id: blocks_moving_average_xx
   parameters:
@@ -363,9 +314,6 @@ blocks:
     type: float
     vlen: '1'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [944, 180.0]
     rotation: 0
     state: true
@@ -383,9 +331,6 @@ blocks:
     type: complex
     vlen: '1'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [808, 284.0]
     rotation: 0
     state: true
@@ -401,9 +346,6 @@ blocks:
     type: complex
     vlen: '1'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [664, 296]
     rotation: 0
     state: enabled
@@ -418,31 +360,8 @@ blocks:
     tag: packet_len
     type: complex
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [576, 836.0]
+    coordinate: [584, 836]
     rotation: 180
-    state: enabled
-- name: blocks_socket_pdu_0
-  id: blocks_socket_pdu
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    host: 127.0.01
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    mtu: '10000'
-    port: '52002'
-    tcp_no_delay: 'False'
-    type: UDP_CLIENT
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1568, 724.0]
-    rotation: 0
     state: enabled
 - name: blocks_stream_to_vector_0
   id: blocks_stream_to_vector
@@ -456,9 +375,6 @@ blocks:
     type: complex
     vlen: '1'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [944, 536.0]
     rotation: 0
     state: enabled
@@ -477,9 +393,6 @@ blocks:
     type: complex
     window: window.rectangular(64)
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [168, 672]
     rotation: 0
     state: enabled
@@ -494,12 +407,9 @@ blocks:
     minoutbuf: '0'
     tech: '127'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1136, 804.0]
+    coordinate: [952, 916]
     rotation: 180
-    state: enabled
+    state: disabled
 - name: ieee802_11_decode_mac_0
   id: ieee802_11_decode_mac
   parameters:
@@ -507,13 +417,10 @@ blocks:
     alias: ''
     comment: ''
     debug: 'False'
-    log: 'False'
+    log: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [864, 676]
     rotation: 0
     state: enabled
@@ -531,29 +438,23 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [432, 672]
     rotation: 0
     state: enabled
-- name: ieee802_11_parse_meat_mac_0
-  id: ieee802_11_parse_meat_mac
+- name: ieee802_11_parse_mac_0
+  id: ieee802_11_parse_mac
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     debug: 'True'
-    log: 'False'
+    log: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1320, 724.0]
-    rotation: 0
-    state: true
+    coordinate: [984, 804]
+    rotation: 180
+    state: enabled
 - name: ieee802_11_sync_long_0
   id: ieee802_11_sync_long
   parameters:
@@ -561,14 +462,11 @@ blocks:
     alias: ''
     comment: ''
     debug: 'False'
-    log: 'False'
+    log: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
     sync_length: sync_length
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [744, 508.0]
     rotation: 0
     state: enabled
@@ -585,9 +483,6 @@ blocks:
     minoutbuf: '0'
     threshold: '0.56'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [304, 488.0]
     rotation: 0
     state: enabled
@@ -677,9 +572,6 @@ blocks:
     ymax: '2'
     ymin: '-2'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [344, 828]
     rotation: 180
     state: enabled
@@ -700,16 +592,16 @@ blocks:
     alpha9: '1.0'
     autoscale: 'False'
     axislabels: 'True'
-    color1: blue
-    color10: dark blue
-    color2: red
-    color3: green
-    color4: black
-    color5: cyan
-    color6: magenta
-    color7: yellow
-    color8: dark red
-    color9: dark green
+    color1: '"blue"'
+    color10: '"blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
     comment: ''
     ctrlpanel: 'False'
     entags: 'True'
@@ -774,9 +666,6 @@ blocks:
     ymin: '-1'
     yunit: '""'
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [1164, 520]
     rotation: 270
     state: enabled
@@ -1145,9 +1034,6 @@ blocks:
     time_source7: ''
     type: fc32
   states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
     coordinate: [32, 216]
     rotation: 0
     state: enabled
@@ -1170,10 +1056,9 @@ connections:
 - [fft_vxx_0, '0', ieee802_11_frame_equalizer_0, '0']
 - [foo_wireshark_connector_0, '0', blocks_file_sink_0, '0']
 - [ieee802_11_decode_mac_0, out, foo_wireshark_connector_0, in]
-- [ieee802_11_decode_mac_0, out, ieee802_11_parse_meat_mac_0, in]
+- [ieee802_11_decode_mac_0, out, ieee802_11_parse_mac_0, in]
 - [ieee802_11_frame_equalizer_0, '0', ieee802_11_decode_mac_0, '0']
 - [ieee802_11_frame_equalizer_0, symbols, blocks_pdu_to_tagged_stream_1, pdus]
-- [ieee802_11_parse_meat_mac_0, fer, blocks_socket_pdu_0, pdus]
 - [ieee802_11_sync_long_0, '0', blocks_stream_to_vector_0, '0']
 - [ieee802_11_sync_short_0, '0', blocks_delay_0, '0']
 - [ieee802_11_sync_short_0, '0', ieee802_11_sync_long_0, '0']
