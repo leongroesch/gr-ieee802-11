@@ -10,3 +10,4 @@ examples/*.py
 cmake-build-debug/
 .idea/
 python
+experiment/analysis/figures
