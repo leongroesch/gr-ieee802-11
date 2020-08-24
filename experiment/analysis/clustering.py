@@ -2,7 +2,7 @@ import dataset_helper as dsh
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import argparse
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans, MeanShift, estimate_bandwidth
 from sklearn.metrics import silhouette_score
 import numpy as np
 
@@ -21,7 +21,7 @@ def silhouette_method(df, n_samples = 1000):
         silhou_score.append(silhouette_score(x, y_km.labels_, metric = 'euclidean' )) 
     return 2 + silhou_score.index(max(silhou_score))
 
-def cluster(df, num_clusters):
+def k_means(df, num_clusters):
     """ Cluster DataFrame into num_clusters cluster
         Use K-Means to cluster the data points appropriate to the frequency offset
     """
@@ -31,7 +31,20 @@ def cluster(df, num_clusters):
     y_km = km.fit_predict(y.reshape(-1, 1))
     return y_km
 
-def plot_clustering(df, y_km):
+def mean_shift(df):
+    """ Clusters DataFrame into clusters
+        Since K-Means is well suited for uneven sized clusters
+    """
+    Y = np.array(df['freq_offset']).reshape(-1, 1)
+    bandwidth = estimate_bandwidth(Y, quantile=0.2, n_samples=500)
+
+    ms = MeanShift(bandwidth=bandwidth, bin_seeding=True)
+    ms.fit(Y)
+    y_km = ms.labels_
+    num_clusters = len(np.unique(y_km))
+    return y_km, num_clusters
+
+def plot_clustering(df, y_km, label):
     """ Plot the data points 
         The color represents the affiliation to a cluster
     """
@@ -40,9 +53,10 @@ def plot_clustering(df, y_km):
     _, ax = plt.subplots()
     for i in range(num_clusters): 
         ax.scatter(x[y_km==i], y[y_km==i])
+        ax.set_title(label=label)
     
     #Export plot as pdf
-    with PdfPages(r'figures/k_means.pdf') as export_pdf:
+    with PdfPages(r'figures/%s.pdf' % label) as export_pdf:
         export_pdf.savefig()
     
 
@@ -111,7 +125,12 @@ if __name__ == '__main__':
         num_clusters = silhouette_method(df)
     else:
         num_clusters = args.num_cluster
-    y_km = cluster(df, num_clusters)
-    plot_clustering(df, y_km)
+    y_km = k_means(df, num_clusters)
+    plot_clustering(df, y_km, "K-Means")
     print_error_rate(df, y_km, num_clusters)
+
+    y_km, num_clusters = mean_shift(df)
+    plot_clustering(df, y_km, "Mean-Shift")
+    print_error_rate(df, y_km, num_clusters)
+
     plt.show()

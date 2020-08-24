@@ -44,7 +44,9 @@ def parse_time_period(argument):
     ''' Parse command line argument
     '''
     time_period = 'D'
-    if argument == "min":
+    if argument == "hour":
+        time_period = 'H'
+    elif argument == "min":
         time_period = 'T'
     elif argument == 'sec':
         time_period = 'S'
@@ -57,7 +59,7 @@ def parse_time_period(argument):
 
 parser = argparse.ArgumentParser(description="Plot basic information about Dataset")
 parser.add_argument('--table', type=str, help="Name of the database Table")
-parser.add_argument('--time_period', type=str, help="Time period for which the data should be resampled [sec | min | day]")
+parser.add_argument('--time_period', type=str, help="Time period for which the data should be resampled [sec | min | hour | day]")
 parser.add_argument('--remove_ten_min', action='store_true', help="The first 10 minutes of each day are removed from the recording")
 args = parser.parse_args()
 
